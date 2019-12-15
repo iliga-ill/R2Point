@@ -1,3 +1,5 @@
+import javafx.scene.shape.Circle;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -21,8 +23,8 @@ public class Polygon extends Deq implements Figure {
         }
         p = R2Point.dist(a, b) + R2Point.dist(b, c) + R2Point.dist(c, a);
         s = Math.abs(R2Point.area(a, b, c));
+        Ugol();
         }
-
 
     public double perimeter() {
         return p;
@@ -30,6 +32,8 @@ public class Polygon extends Deq implements Figure {
     public double area() {
         return s;
     }
+
+
 
     public Figure add(R2Point t) {
         int i;
@@ -57,22 +61,17 @@ public class Polygon extends Deq implements Figure {
             pushFront(t);
         }
 
+
         for (i=0;i<4;i++){arrayR[i]=0;}
         for (int j=0;j<array.length;j++) {
-        t.x0=-10;
-        t.y0=0;
-        if (!t.lightR(back(), front())) {arrayR[0]=arrayR[0]+1;}else{arrayR[0]=arrayR[0]-1000;}
-        t.x0=0;
-        t.y0=10;
-        if (!t.lightR(back(), front())) {arrayR[1]=arrayR[1]+1;}else{arrayR[1]=arrayR[1]-1000;}
-        t.x0=10;
-        t.y0=0;
-        if (!t.lightR(back(), front())) {arrayR[2]=arrayR[2]+1;}else{arrayR[2]=arrayR[2]-1000;}
-        t.x0=0;
-        t.y0=-10;
-        if (!t.lightR(back(), front())) {arrayR[3]=arrayR[3]+1;}else{arrayR[3]=arrayR[3]-1000;}
+        for (i=0;i<arrayO.length;i++){
+        t.x0=arrayO[i][0];
+        t.y0=arrayO[i][1];
+        if (!t.lightR(back(), front())) {arrayR[i]=arrayR[i]+1;}else{arrayR[i]=arrayR[i]-10000;}
+        }
         pushBack(popFront());
         }
+
 
         return this;
     }
@@ -82,8 +81,41 @@ public class Polygon extends Deq implements Figure {
             g.fillOval((int)front().x-5/2,(int)-front().y-5/2,5,5);
             g.drawLine((int)front().x,(int)-front().y,(int) back().x,(int) -back().y);
             pushBack(popFront());
+
+
         }
 
+    }
+
+    public void Ugol(){
+        arrayO = new double[E][2];
+        U=360/E;
+        U1=U;
+        int i=0;
+        while (U1<90){
+            arrayO[i][0]=Math.sin(90-U1)*R;//x
+            arrayO[i][1]=Math.cos(90-U1)*R;//y
+            U1=U1+U;
+            i++;
+        }
+        while (U1<180){
+            arrayO[i][0]=Math.sin(U1-90)*R;//x
+            arrayO[i][1]=-Math.cos(U1-90)*R;//y
+            U1=U1+U;
+            i++;
+        }
+        while (U1<270){
+            arrayO[i][0]=-Math.sin(90-(U1-180))*R;//x
+            arrayO[i][1]=-Math.cos(90-(U1-180))*R;//y
+            U1=U1+U;
+            i++;
+        }
+        while (U1<360){
+            arrayO[i][0]=-Math.sin(U1-270)*R;//x
+            arrayO[i][1]=Math.cos(U1-270)*R;//y
+            U1=U1+U;
+            i++;
+        }
     }
 
     public void GetTr() {

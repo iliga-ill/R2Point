@@ -1,8 +1,13 @@
-public class Deq {
+import javax.jws.soap.SOAPBinding;
+
+public class Deq extends UserWindow {
     private final static int DEFSIZE = 16;
     static R2Point[] array;
     public int[] arrayR;
     public int size, head, tail, T;
+    double R=Circle/2;
+    int U,U1;
+    public double[][] arrayO;
 
     private int forward(int index) {
         //System.out.println("forward(index= " + index + " )");
@@ -19,8 +24,8 @@ public class Deq {
     public Deq(int size) {
         //System.out.println("Deq(size= " + size + " )");
         array = new R2Point[size];
-        arrayR = new int[4];
-        for(int i=0;i<4;i++){arrayR[i]=0;}
+        arrayR = new int[E];
+        for(int i=0;i<arrayR.length;i++){arrayR[i]=0;}
        // System.out.println("Deq->array = new R2Point[size= "+size+" ];");
         this.size = head = 0;
         //System.out.println("Deq->this.size = head = 0;");
@@ -89,9 +94,11 @@ public class Deq {
         //System.out.println("back->return array[tail= "+tail+" ];");
         return array[tail];
     }
+
     public boolean GetT(){
         T=0;
-        for(int i=0;i<4;i++){T+=arrayR[i];}
+        for(int i=0;i<arrayR.length;i++){T+=arrayR[i];}
+        System.out.println(arrayR.toString().chars());
         if (T>0) { return true;}
         else{return false;}
     }

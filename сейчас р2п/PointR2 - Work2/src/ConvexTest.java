@@ -6,7 +6,7 @@ public class ConvexTest {
 
     public static void main(String[] args) throws Exception {
         Convex convex = new Convex();
-        window = new UserWindow(convex);
+        window = new UserWindow(convex,0);
         while (true) {
             convex.add(new R2Point());
             System.out.println("S = " + convex.area() + " , P = " + convex.perimeter());
